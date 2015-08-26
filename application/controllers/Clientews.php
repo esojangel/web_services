@@ -53,4 +53,15 @@ class Clientews extends CI_Controller {
 		echo '<h2>Response</h2><pre>' . htmlspecialchars($client->response, ENT_QUOTES) . '</pre>';
 		echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->debug_str, ENT_QUOTES) . '</pre>';
 	}
+	function milagros(){
+		$webserviceUrl = "http://172.26.98.91:8080/WS_ClientProveedor/hello?wsdl";
+		$client = new nusoap_client($webserviceUrl, true);
+		$err = $client->getError();
+		if($err) echo $err;
+		$response = $client->call("getHelloWorld");
+		print_r($response["return"]);
+		echo '<h2>Request</h2><pre>' . htmlspecialchars($client->request, ENT_QUOTES) . '</pre>';
+		echo '<h2>Response</h2><pre>' . htmlspecialchars($client->response, ENT_QUOTES) . '</pre>';
+		echo '<h2>Debug</h2><pre>' . htmlspecialchars($client->debug_str, ENT_QUOTES) . '</pre>';
+	}
 }
